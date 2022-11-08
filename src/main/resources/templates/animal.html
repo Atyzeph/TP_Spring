@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/resources/css/main.css}" />
+    <meta charset="utf-8">
+    <title>Liste des annimaux</title>
+</head>
+
+<body>
+    <table class="mainTable">
+        <thead>
+            <!-- … -->
+        </thead>
+        <tbody>
+            <tr th:each="animalsItem : ${animalsList}">
+                <td th:text="${animalsItem.commonName}"/>
+                <td th:text="${animalsItem.latinName}"/>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

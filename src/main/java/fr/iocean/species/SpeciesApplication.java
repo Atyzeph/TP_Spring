@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import fr.iocean.species.model.Animal;
 import fr.iocean.species.model.Person;
@@ -17,6 +18,7 @@ import fr.iocean.species.repository.AnimalRepository;
 import fr.iocean.species.repository.PersonRepository;
 
 @SpringBootApplication
+@EnableAspectJAutoProxy
 public class SpeciesApplication implements CommandLineRunner {
 
     Logger logger = LoggerFactory.getLogger(SpeciesApplication.class);
