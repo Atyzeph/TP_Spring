@@ -1,6 +1,10 @@
 package fr.iocean.species.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import java.util.Set;
 
 @Entity
@@ -9,12 +13,17 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
+    @Size(min = 3)
     @Column(length = 50)
     private String firstname;
 
+    @NotEmpty
+    @Size(min = 3)
     @Column(length = 50)
     private String lastname;
 
+    @Min(1)
     private Integer age;
 
     /*
