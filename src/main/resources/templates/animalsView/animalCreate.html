@@ -23,6 +23,13 @@
             <label for="color">Couleur : </label>
             <input type="text" th:field="*{color}" id="color">
         </div>
+        <label for="species">Espèce :</label>
+        <select th:field="*{species}" id="species">
+            <option th:each="sp : ${speciesList}" 
+                    th:value="${sp.id}" 
+                    th:text="${sp.commonName}">
+            </option>
+          </select>
         <input type="submit" class="button" value="Sauver"/>
 		<input type="button" class="button" value="Retour" onclick="window.location='/animals'"/>
     </form>

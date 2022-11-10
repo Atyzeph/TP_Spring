@@ -10,20 +10,18 @@
     <table class="mainTable">
         <thead>
             <h1>Liste des animaux</h1>
-            <th>Éspèce</th>
             <th>Nom</th>
             <th>Couleur</th>
             <th>Sexe</th>
             <button type="button" onclick="window.location='/animals/create'">➕ Ajouter un animal</button>
         </thead>
         <tbody>
-            <tr th:each="animalItem : ${animals}">
-                <td th:text="${animalItem.species}"></td>
-                <td th:text="${animalItem.name}"></td>
-                <td th:text="${animalItem.color}"></td>
-                <td th:text="${animalItem.sex}"></td>
-                <td><a th:href="@{'/animals/' + ${animalItem.id}}">Détails</a></td>
-                <td><a th:href="@{'/animals/delete/' + ${animalItem.id}}">Supprimer</a></td>
+            <tr th:each="animal : ${animals}">
+                <td th:text="${animal.name}"></td>
+                <td th:text="${animal.color}"></td>
+                <td th:text="${animal.sex}"></td>
+                <td><a th:href="@{'/animals/' + ${animal.id}}">Détails</a></td>
+                <td><a th:href="@{'/animals/delete/' + ${animal.id}}">Supprimer</a></td>
             </tr>
         </tbody>
     </table>

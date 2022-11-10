@@ -1,9 +1,9 @@
 package fr.iocean.species.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +21,12 @@ public class SpeciesController {
 	
 	@GetMapping("/species")
 	public String listSpecies(Model model) {
-		List<Species> species = speciesRepository.findAll();
-		model.addAttribute("species", species);
+		model.addAttribute(
+				"species", 
+				this.speciesRepository.findAll(Sort.by(Sort.Direction.ASC, "commonName"))
+				);
 		
-		return "spicies";
+		return "speciesView/species";
 	}
 	
 	@GetMapping("/species/{id}")
@@ -33,7 +35,7 @@ public class SpeciesController {
 		if (species.isPresent()) {
 			model.addAttribute(species.get());
 			
-			return "species";
+			return "speciesView/species";
 		}
 		return "error";
 	}

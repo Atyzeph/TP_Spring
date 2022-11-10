@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.iocean.species.model.Animal;
 import fr.iocean.species.repository.AnimalRepository;
+import fr.iocean.species.repository.SpeciesRepository;
+
 import org.springframework.data.domain.Sort;
 
 
@@ -21,6 +23,9 @@ public class AnimalController {
 
 	@Autowired
 	private AnimalRepository animalRepository;
+	
+	@Autowired
+	private SpeciesRepository speciesRepository;
 	
 	@GetMapping("/animals")
 	public String listAnimals(Model model) {
@@ -37,6 +42,10 @@ public class AnimalController {
 		Optional<Animal> animals = animalRepository.findById(id);
 		if (animals.isPresent()) {
 			model.addAttribute(animals.get());
+			model.addAttribute(
+					"speciesList",
+					speciesRepository.findAll(Sort.by(Sort.Direction.ASC, "commonName"))
+					);
 			
 			return "animalsView/animalId";
 		}
@@ -45,7 +54,10 @@ public class AnimalController {
 	
 	@GetMapping("/animals/create")
 	public String Create(Model model) {
-		
+		model.addAttribute(
+				"speciesList",
+				speciesRepository.findAll(Sort.by(Sort.Direction.ASC, "commonName"))
+				);
 		model.addAttribute(new Animal());
 		
 		return "animalsView/animalCreate";
