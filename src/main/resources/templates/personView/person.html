@@ -16,8 +16,8 @@
         </thead>
         <tbody>
             <tr th:each="personItem : ${persons}">
-                <td th:text="${personItem.firstname}">test</td>
-                <td th:text="${personItem.lastname}">test</td>
+                <td th:text="${personItem.firstname}"></td>
+                <td th:text="${personItem.lastname}"></td>
                 <td><a th:href="@{'/person/' + ${personItem.id}}">Détails</a></td>
                 <td><a th:href="@{'/person/delete/' + ${personItem.id}}">Supprimer</a></td>
             </tr>

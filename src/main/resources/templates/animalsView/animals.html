@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <link rel="stylesheet" th:href="@{/resources/css/main.css}" /> -->
+    <meta charset="utf-8">
+    <title>Liste des animaux</title>
+</head>
+
+<body>
+    <table class="mainTable">
+        <thead>
+            <h1>Liste des animaux</h1>
+            <th>Éspèce</th>
+            <th>Nom</th>
+            <th>Couleur</th>
+            <th>Sexe</th>
+            <button type="button" onclick="window.location='/animals/create'">➕ Ajouter un animal</button>
+        </thead>
+        <tbody>
+            <tr th:each="animalItem : ${animals}">
+                <td th:text="${animalItem.species}"></td>
+                <td th:text="${animalItem.name}"></td>
+                <td th:text="${animalItem.color}"></td>
+                <td th:text="${animalItem.sex}"></td>
+                <td><a th:href="@{'/animals/' + ${animalItem.id}}">Détails</a></td>
+                <td><a th:href="@{'/animals/delete/' + ${animalItem.id}}">Supprimer</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

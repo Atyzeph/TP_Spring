@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <link rel="stylesheet" th:href="@{/resources/css/main.css}" /> -->
+    <meta charset="utf-8">
+    <title>Détails</title>
+</head>
+
+<body>
+    <h1>Nouvel animal</h1>
+
+    <form th:object="${animal}" th:action="@{/animals}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label for="name">Name : </label>
+            <input type="text" th:field="*{name}" id="name">
+        </div>
+        <div>
+            <label for="sex">Sexe : </label>
+            <input type="text" th:field="*{sex}" id="sex">
+        </div>
+        <div>
+            <label for="color">Couleur : </label>
+            <input type="text" th:field="*{color}" id="color">
+        </div>
+        <input type="submit" class="button" value="Sauver"/>
+		<input type="button" class="button" value="Retour" onclick="window.location='/animals'"/>
+    </form>
+</body>
+</html>
