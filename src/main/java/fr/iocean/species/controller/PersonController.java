@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class PersonController {
 	}
 	
 	@GetMapping("/person/{id}")
+	@PreAuthorize("hasRole('ADMIN') or principal.username == 'johndoe' ")
 	public String initUpdate(@PathVariable("id") Integer id, Model model) {
 		Optional<Person> person = personRepository.findById(id);
 		if (person.isPresent()) {
@@ -41,6 +43,7 @@ public class PersonController {
 	}
 	
 	@GetMapping("/person/create")
+	@PreAuthorize("hasRole('ADMIN') and hasRole('USER')")
 	public String create(Model model) {
 		
 		model.addAttribute(new Person());
