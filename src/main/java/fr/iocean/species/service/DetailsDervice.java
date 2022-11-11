@@ -1,0 +1,26 @@
+package fr.iocean.species.service;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import fr.iocean.species.model.User;
+import fr.iocean.species.repository.UserRepository;
+
+public class DetailsDervice implements UserDetailsService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Override
+	@Transactional
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		User user = userRepository.findByUsername(username);
+		return (UserDetails) user;
+	}
+
+}
