@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <link rel="stylesheet" th:href="@{/resources/css/main.css}" /> -->
+    <meta charset="utf-8">
+    <title>Liste des éspèces</title>
+</head>
+
+<body>
+    <button type="button" onclick="window.location='/home'">Retour à l'acceuil</button>
+    <hr>
+    <table class="mainTable">
+        <thead>
+            <h1>Liste des éspèces</h1>
+            <th>Nom scientifique</th>
+            <th>Nom commun</th>
+        </thead>
+        <tbody>
+            <tr th:each="specie : ${species}">
+                <td th:text="${specie.latinName}"></td>
+                <td th:text="${specie.commonName}"></td>
+                <td><a th:href="@{'/species/' + ${specie.id}}"></a></td>
+                <td><a th:href="@{'/species/delete/' + ${specie.id}}"></a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

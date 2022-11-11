@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <link rel="stylesheet" th:href="@{/resources/css/main.css}" /> -->
+    <meta charset="utf-8">
+    <title>Liste des personnes</title>
+</head>
+
+<body>
+    <button type="button" onclick="window.location='/home'">Retour à l'acceuil</button>
+    <hr>
+    <table class="mainTable">
+        <thead>
+            <h1>Liste des personnes</h1>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <button type="button" onclick="window.location='/persons/create'">➕ Ajouter une personne</button>
+        </thead>
+        <tbody>
+            <tr th:each="personItem : ${persons}">
+                <td th:text="${personItem.firstname}"></td>
+                <td th:text="${personItem.lastname}"></td>
+                <td><a th:href="@{'/persons/' + ${personItem.id}}">Détails</a></td>
+                <td><a th:href="@{'/persons/delete/' + ${personItem.id}}">Supprimer</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
