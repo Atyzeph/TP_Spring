@@ -2,20 +2,14 @@ package fr.iocean.species.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
     
     @Column(length = 50)
     private String username;
@@ -24,14 +18,18 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Authorities> authorities;
+    @JoinTable(
+            name = "user_authority",
+            inverseJoinColumns = { @JoinColumn(name = "authority_name", referencedColumnName = "name") }
+    )
+    private List<Authority> authority;
     
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -51,11 +49,11 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Authorities> getAuthorities() {
-		return authorities;
+	public List<Authority> getAuthority() {
+		return authority;
 	}
 
-	public void setAuthorities(List<Authorities> authorities) {
-		this.authorities = authorities;
+	public void setAuthority(List<Authority> authority) {
+		this.authority = authority;
 	}
 }
