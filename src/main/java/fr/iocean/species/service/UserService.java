@@ -32,7 +32,7 @@ public class UserService {
 		User user = new User();
 		user.setUsername(userName);
 		user.setPassword(passwordEncoder.encode(password));
-		user.getAuthorities().add(this.authorityRepository.findById("ROLE_USER").orElseThrow(EntityNotFoundException::new));
+		user.getAuthority().add(this.authorityRepository.findById("ROLE_USER").orElseThrow(EntityNotFoundException::new));
 		
 		return this.userRepository.save(user);
 	}

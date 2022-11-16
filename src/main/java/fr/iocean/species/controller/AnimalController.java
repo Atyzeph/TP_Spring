@@ -8,16 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.iocean.species.model.Animal;
 import fr.iocean.species.repository.AnimalRepository;
 import fr.iocean.species.repository.SpeciesRepository;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 
-@RequestMapping
+
 @Controller
 public class AnimalController {
 
@@ -28,6 +28,7 @@ public class AnimalController {
 	private SpeciesRepository speciesRepository;
 	
 	@GetMapping("/animals")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public String listAnimals(Model model) {
 		model.addAttribute(
 				"animals", 
@@ -38,6 +39,7 @@ public class AnimalController {
 	}
 	
 	@GetMapping("/animals/{id}")
+	@PreAuthorize("haseRole('ADMIN') or hasRole('USER')")
 	public String initUpdate(@PathVariable("id") Integer id, Model model) {
 		Optional<Animal> animals = animalRepository.findById(id);
 		if (animals.isPresent()) {
@@ -53,6 +55,7 @@ public class AnimalController {
 	}
 	
 	@GetMapping("/animals/create")
+	@PreAuthorize("haseRole('ADMIN') or hasRole('USER')")
 	public String Create(Model model) {
 		model.addAttribute(
 				"speciesList",
@@ -64,6 +67,7 @@ public class AnimalController {
 	}
 		
 	@PostMapping("/animals")
+	@PreAuthorize("haseRole('ADMIN') or hasRole('USER')")
 	public String CreateOrUpdate(Animal animal) {
 		
 		this.animalRepository.save(animal);
@@ -72,6 +76,7 @@ public class AnimalController {
 	}
 
 	@GetMapping("/animals/delete/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String delete(@PathVariable("id") Integer animalId) {
 		Optional<Animal> animalToDelete = this.animalRepository.findById(animalId);
 		animalToDelete.ifPresent(a -> this.animalRepository.delete(a));

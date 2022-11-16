@@ -8,4 +8,7 @@ import fr.iocean.species.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
+	// Le nom de la méthode correspond à la colone en bdd
+	public User findByUsername(String username);
+	
 }
